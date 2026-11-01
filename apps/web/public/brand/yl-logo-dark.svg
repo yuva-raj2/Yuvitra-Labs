@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" width="380" height="90" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 395 90" width="395" height="90" fill="none">
   <defs>
-    <linearGradient id="darkBgGrad" x1="0" y1="0" x2="380" y2="90" gradientUnits="userSpaceOnUse">
+    <linearGradient id="darkBgGrad" x1="0" y1="0" x2="395" y2="90" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#0E1017" />
       <stop offset="100%" stop-color="#07080B" />
     </linearGradient>
@@ -19,7 +19,7 @@
   </defs>
 
   <!-- Container Box -->
-  <rect width="380" height="90" rx="14" fill="url(#darkBgGrad)" stroke="#27272A" stroke-width="1.5" />
+  <rect width="395" height="90" rx="14" fill="url(#darkBgGrad)" stroke="#27272A" stroke-width="1.5" />
 
   <!-- Amber Ambient Hub Backlight -->
   <circle cx="52" cy="52" r="20" fill="#F59E0B" opacity="0.14" filter="url(#darkGlow)" />
@@ -50,7 +50,7 @@
     <text x="0" y="47" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="25" font-weight="800" letter-spacing="0.12em" fill="#F4F4F5">YUVITRA</text>
     <text x="148" y="47" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="25" font-weight="700" letter-spacing="0.12em" fill="#F59E0B">LABS</text>
 
-    <!-- Subtitle -->
-    <text x="1" y="65" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="8" font-weight="600" letter-spacing="0.26em" fill="#71717A">INDUSTRIAL SOFTWARE &amp; CMMS</text>
+    <!-- Subtitle / Industrial Engineering Descriptor -->
+    <text x="1" y="65" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="7.2" font-weight="600" letter-spacing="0.14em" fill="#71717A">INDUSTRIAL SOFTWARE &amp; DIGITAL ENGINEERING</text>
   </g>
 </svg>
