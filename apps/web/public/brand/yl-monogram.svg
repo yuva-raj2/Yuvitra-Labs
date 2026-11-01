@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="ylAmberGradient" x1="50" y1="24" x2="78" y2="78" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="60%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="ylPlatinumGradient" x1="22" y1="24" x2="50" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E4E4E7" />
+    </linearGradient>
+    <filter id="ylGlow" x="0" y="0" width="100" height="100" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow Behind Monogram -->
+  <circle cx="62" cy="62" r="22" fill="#F59E0B" opacity="0.12" filter="url(#ylGlow)" />
+
+  <!-- Left Upper Wing of Y (Platinum Structural Beam) -->
+  <path
+    d="M 23 24 L 50 55"
+    stroke="url(#ylPlatinumGradient)"
+    stroke-width="9.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Integrated L-Spine (Right Arm -> Central Stem -> Grounded Foot) -->
+  <path
+    d="M 77 24 L 50 55 V 77 H 77"
+    stroke="url(#ylAmberGradient)"
+    stroke-width="9.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Precision Telemetry Nexus Node -->
+  <circle cx="50" cy="55" r="3.2" fill="#090A0F" stroke="#F59E0B" stroke-width="1.8" />
+</svg>

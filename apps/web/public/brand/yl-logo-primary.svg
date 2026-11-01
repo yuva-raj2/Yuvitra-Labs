@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" width="340" height="80" fill="none">
+  <defs>
+    <linearGradient id="primaryAmber" x1="38" y1="20" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="60%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="primaryPlatinum" x1="16" y1="20" x2="38" y2="46" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E4E4E7" />
+    </linearGradient>
+    <filter id="primaryGlow" x="0" y="0" width="80" height="80" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow Behind Monogram -->
+  <circle cx="48" cy="48" r="16" fill="#F59E0B" opacity="0.14" filter="url(#primaryGlow)" />
+
+  <!-- Monogram Mark -->
+  <!-- Left Upper Wing of Y -->
+  <path
+    d="M 18 20 L 39 46"
+    stroke="url(#primaryPlatinum)"
+    stroke-width="7.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Integrated L-Spine (Right Arm -> Stem -> Foot) -->
+  <path
+    d="M 60 20 L 39 46 V 63 H 60"
+    stroke="url(#primaryAmber)"
+    stroke-width="7.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Nexus Node -->
+  <circle cx="39" cy="46" r="2.5" fill="#090A0F" stroke="#F59E0B" stroke-width="1.4" />
+
+  <!-- Divider Line -->
+  <line x1="84" y1="22" x2="84" y2="62" stroke="#27272A" stroke-width="1.5" />
+
+  <!-- Typography Wordmark -->
+  <g transform="translate(102, 0)">
+    <!-- Primary Brand Name -->
+    <text x="0" y="42" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800" letter-spacing="0.12em" fill="#F4F4F5">YUVITRA</text>
+    <text x="144" y="42" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="700" letter-spacing="0.12em" fill="#F59E0B">LABS</text>
+
+    <!-- Subtitle / Industrial Engineering Descriptor -->
+    <text x="1" y="58" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="7.5" font-weight="600" letter-spacing="0.26em" fill="#71717A">INDUSTRIAL SOFTWARE &amp; CMMS</text>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" width="380" height="90" fill="none">
+  <defs>
+    <linearGradient id="darkBgGrad" x1="0" y1="0" x2="380" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0E1017" />
+      <stop offset="100%" stop-color="#07080B" />
+    </linearGradient>
+    <linearGradient id="darkAmber" x1="42" y1="24" x2="68" y2="68" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="60%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="darkPlatinum" x1="18" y1="24" x2="42" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E4E4E7" />
+    </linearGradient>
+    <filter id="darkGlow" x="0" y="0" width="90" height="90" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+    </filter>
+  </defs>
+
+  <!-- Container Box -->
+  <rect width="380" height="90" rx="14" fill="url(#darkBgGrad)" stroke="#27272A" stroke-width="1.5" />
+
+  <!-- Amber Ambient Hub Backlight -->
+  <circle cx="52" cy="52" r="20" fill="#F59E0B" opacity="0.14" filter="url(#darkGlow)" />
+
+  <!-- Monogram Mark -->
+  <path
+    d="M 21 24 L 45 53"
+    stroke="url(#darkPlatinum)"
+    stroke-width="8"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M 69 24 L 45 53 V 72 H 69"
+    stroke="url(#darkAmber)"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <circle cx="45" cy="53" r="2.8" fill="#090A0F" stroke="#F59E0B" stroke-width="1.6" />
+
+  <!-- Subtle Vertical Rule -->
+  <line x1="96" y1="24" x2="96" y2="66" stroke="#27272A" stroke-width="1.5" />
+
+  <!-- Typography -->
+  <g transform="translate(118, 0)">
+    <text x="0" y="47" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="25" font-weight="800" letter-spacing="0.12em" fill="#F4F4F5">YUVITRA</text>
+    <text x="148" y="47" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="25" font-weight="700" letter-spacing="0.12em" fill="#F59E0B">LABS</text>
+
+    <!-- Subtitle -->
+    <text x="1" y="65" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="8" font-weight="600" letter-spacing="0.26em" fill="#71717A">INDUSTRIAL SOFTWARE &amp; CMMS</text>
+  </g>
+</svg>
