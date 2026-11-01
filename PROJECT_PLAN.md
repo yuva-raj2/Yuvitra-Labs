@@ -1,6 +1,6 @@
 # Yuvitra Labs & Yuvitra CMMS — Master Project Plan & Architecture Blueprint
 
-**Document Version:** 1.1.0  
+**Document Version:** 1.2.0  
 **Status:** Approved Architectural Baseline & Phased Implementation Plan  
 **Role:** Chief Software Architect & Technical Lead  
 **Target Enterprise:** Yuvitra Labs (Industrial Software & SaaS Platform)  
@@ -16,10 +16,11 @@ Yuvitra Labs is an industrial software venture engineering modern digital soluti
 1. **Initial Scope Focus:** Deliver a high-precision corporate website for Yuvitra Labs and a compelling product showcase for Yuvitra CMMS. Full operational CMMS dashboards are deferred to later phases.
 2. **Unified Frontend:** Single Next.js (App Router) application handling both corporate marketing pages and future authenticated CMMS routes.
 3. **Decoupled Backend:** Independent Java Spring Boot service exposing a strongly typed GraphQL API.
-4. **Local Database:** Dockerized PostgreSQL (`postgres:16-alpine`). Redis is removed from initial scope to keep development lean.
-5. **Purposeful Visuals:** Three.js 3D elements will remain lightweight, minimal, and purposeful (focusing on responsive industrial digital twin models rather than heavy, distracting visual effects).
-6. **Configurable Integrations:** Email, WhatsApp, PDF generation, and AI chatbot services are designed as configurable adapters with local mock fallbacks.
-7. **Factual Integrity:** Zero unverified claims, zero fictitious customer results, zero uncertified compliance badges. All portfolio references are explicitly marked for founder verification prior to publication.
+4. **Local Database Architecture (Native Windows):** Native PostgreSQL 16 installed directly on Windows running as an automatic Windows service on default port `5432`, managed visually via **pgAdmin 4**. Spring Boot connects via environment variables. Redis is removed from initial scope to keep development lean.
+5. **Docker Desktop Status:** Docker Desktop is **not required** and is completely removed as a development prerequisite. Docker remains strictly an optional deployment target for future production containerization.
+6. **Purposeful Visuals:** Three.js 3D elements will remain lightweight, minimal, and purposeful (focusing on responsive industrial digital twin models rather than heavy, distracting visual effects).
+7. **Configurable Integrations:** Email, WhatsApp, PDF generation, and AI chatbot services are designed as configurable adapters with local mock fallbacks.
+8. **Factual Integrity:** Zero unverified claims, zero fictitious customer results, zero uncertified compliance badges. All portfolio references are explicitly marked for founder verification prior to publication.
 
 ---
 
@@ -37,12 +38,12 @@ Yuvitra Labs is an industrial software venture engineering modern digital soluti
 | **npm** | `11.6.2` | Frontend package manager | Verified & Ready |
 | **Java** | `17.0.16 LTS` (64-Bit) | Backend JVM runtime (Spring Boot 3.x) | Verified & Ready |
 | **Git** | `2.48.1.windows.1` | Source code control | Verified & Ready |
-| **Docker Engine / Desktop** | **Not found on system `PATH`** | Containerization for local PostgreSQL | **Prerequisite Action Required:** Docker Desktop for Windows must be installed and running before starting the local PostgreSQL container. |
+| **PostgreSQL 16 & pgAdmin 4** | Native Windows Service (Port `5432`) | Primary relational database & management GUI | **Local Prerequisite:** Install PostgreSQL 16 with pgAdmin 4 on Windows. Configure service to start automatically on port `5432`. Create database `yuvitra_db`. |
 | **Maven / Gradle** | Not on system `PATH` | Java build automation | **Standard Action:** Package backend with Maven Wrapper (`./mvnw` / `mvnw.cmd`) for zero-install standalone compilation. |
-| **PostgreSQL CLI (`psql`)** | Not on system `PATH` | Direct database shell | **Standard Action:** PostgreSQL will run isolated inside Docker (`postgres:16-alpine`), managed via Flyway migrations. |
+| **Docker Engine / Desktop** | Not installed / Not supported on host | Optional future containerization | **No action required for development.** Docker Desktop is explicitly removed as a prerequisite. Docker remains optional for future cloud deployment only. |
 
-> [!IMPORTANT]
-> **Prerequisite Alert:** Docker Desktop for Windows is required for local database provisioning. If Docker Desktop is not currently installed, download and install it (with WSL 2 backend enabled) prior to running the database container, or provide a remote PostgreSQL connection string.
+> [!NOTE]
+> **Local Database Prerequisite:** Native PostgreSQL 16 on Windows with pgAdmin 4 running on standard port `5432`. Spring Boot will connect directly via standard JDBC environment variables (`SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD`) with localhost fallback defaults.
 
 ---
 
@@ -135,7 +136,7 @@ YUVITRA_LABS/
 │           │   │       ├── inventory/   # Spare parts catalog (prepared for phase 4)
 │           │   │       └── integration/ # Configurable adapters (Email, WhatsApp, PDF, AI)
 │           │   └── resources/
-│           │       ├── application.yml  # Configurable integration flags and database URL
+│           │       ├── application.yml  # Environment-driven database & integration configs
 │           │       ├── graphql/         # GraphQL schema files (*.graphqls)
 │           │       └── db/migration/    # Flyway SQL migrations (V1__, V2__)
 │           └── test/                    # JUnit 5 & Mockito test suites
@@ -146,14 +147,16 @@ YUVITRA_LABS/
 │       └── package.json
 │
 ├── infrastructure/
-│   ├── docker/
-│   │   └── docker-compose.yml           # Dockerized PostgreSQL (Redis removed from initial scope)
-│   └── k8s-or-cloud/                    # Production deployment descriptors
+│   ├── database/                        # Native PostgreSQL local setup scripts & SQL seeds
+│   │   └── init-db.sql                  # Database creation & user grants
+│   └── docker/                          # (Optional) Dockerfiles for future production cloud builds
+│       ├── Dockerfile.web
+│       └── Dockerfile.api
 │
 ├── docs/
 │   ├── adr/                             # Architecture Decision Records
 │   ├── api/                             # GraphQL schema documentation
-│   └── runbooks/                        # Setup guides, operational runbooks
+│   └── runbooks/                        # Native PostgreSQL setup guide & operational runbooks
 │
 ├── .gitignore
 ├── .editorconfig
@@ -208,9 +211,24 @@ The operational CMMS dashboard is intentionally deferred from Phase 1. Its archi
 
 ---
 
-## 6. PostgreSQL Relational Data Model (Dockerized)
+## 6. PostgreSQL Relational Data Model (Native Windows Service)
 
-PostgreSQL runs via Docker (`infrastructure/docker/docker-compose.yml`) using `postgres:16-alpine`. Redis has been removed from the initial scope to eliminate unnecessary runtime dependencies.
+PostgreSQL 16 runs directly as a native Windows service listening on default port `5432`, managed visually via **pgAdmin 4**. Redis has been removed from the initial scope to eliminate unnecessary runtime dependencies.
+
+Spring Boot connects directly using standard JDBC environment variables configured in `apps/api/src/main/resources/application.yml`:
+```yaml
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/yuvitra_db}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 300000
+      connection-timeout: 20000
+```
 
 ```mermaid
 erDiagram
@@ -396,8 +414,14 @@ All external integrations are architected with **pluggable adapters and configur
 - **Multi-Tenancy Assurance:** Tenant ID scoping baked into JPA repository interfaces for future SaaS phases.
 
 ### 9.3 Infrastructure & Local Development
-- **Local PostgreSQL:** Containerized via Docker Compose on standard port `5432` with persistent Docker volume storage.
-- **No Redis Dependency:** Caching in initial phases utilizes in-memory ConcurrentHashMap / Caffeine, eliminating Redis configuration overhead.
+- **Local PostgreSQL:** Native Windows installation of PostgreSQL 16 on default port `5432`, managed visually via **pgAdmin 4**.
+- **Windows Service Automation:** PostgreSQL configured to start automatically as a Windows service (`postgresql-x64-16`) in `services.msc`.
+- **Environment-Driven Configuration:** Spring Boot dynamically connects to PostgreSQL via environment variables:
+  - `SPRING_DATASOURCE_URL` (Defaults to `jdbc:postgresql://localhost:5432/yuvitra_db`)
+  - `SPRING_DATASOURCE_USERNAME` (Defaults to `postgres`)
+  - `SPRING_DATASOURCE_PASSWORD` (Defaults to `postgres`)
+- **Docker Role:** Strictly optional for future production container packaging and cloud deployment. Zero Docker runtime dependency on the local Windows development machine.
+- **No Redis Dependency:** Initial phases operate without Redis; in-memory caching (ConcurrentHashMap / Caffeine) is used if required.
 
 ---
 
@@ -405,7 +429,7 @@ All external integrations are architected with **pluggable adapters and configur
 
 ```mermaid
 flowchart TD
-    P1["Phase 1: Foundation, Corporate Website & CMMS Showcase\n(Monorepo, Dockerized PostgreSQL, Next.js, Minimal Three.js, Contact GraphQL)"]
+    P1["Phase 1: Foundation, Corporate Website & CMMS Showcase\n(Monorepo, Native PostgreSQL 16 + pgAdmin 4, Next.js, Minimal Three.js, Contact GraphQL)"]
     P2["Phase 2: Spring Boot Backend Architecture & GraphQL Core\n(Schema expansion, Security baseline, Flyway migrations)"]
     P3["Phase 3: Yuvitra CMMS Core Engine\n(Asset Hierarchy, Work Order State Machine, PM Scheduling)"]
     P4["Phase 4: CMMS Extended Modules\n(Spare parts inventory, Floor requests, KPI calculations)"]
@@ -420,10 +444,10 @@ flowchart TD
 ```
 
 ### Phase 1: Foundation, Corporate Website & CMMS Showcase *(Current Phase)*
-1. Set up monorepo structure: `apps/web`, `apps/api`, `packages/graphql-schema`, `infrastructure/docker`, and `docs/`.
-2. Configure Docker Compose for local PostgreSQL (`infrastructure/docker/docker-compose.yml`).
+1. Set up monorepo structure: `apps/web`, `apps/api`, `packages/graphql-schema`, `infrastructure/database`, and `docs/`.
+2. Configure local native PostgreSQL 16 database (`yuvitra_db`) via pgAdmin 4 on port `5432` and verify connection.
 3. Scaffold unified Next.js 15+ application with TypeScript and Tailwind CSS.
-4. Scaffold independent Spring Boot 3.x backend with Maven Wrapper and Spring for GraphQL.
+4. Scaffold independent Spring Boot 3.x backend with Maven Wrapper, Spring for GraphQL, and environment-driven PostgreSQL configuration.
 5. Implement purposeful, minimal Three.js industrial visualizer hero.
 6. Build complete public corporate website (Home, Solutions, Technology, About, Contact).
 7. Build Yuvitra CMMS Product Showcase page with interactive feature walkthroughs.
@@ -454,7 +478,7 @@ flowchart TD
 1. Write JUnit 5 / Mockito backend unit and integration tests.
 2. Write frontend component and end-to-end tests.
 3. Configure GitHub Actions CI workflows.
-4. Create production multi-stage Dockerfiles.
+4. Create optional production multi-stage Dockerfiles.
 
 ---
 
@@ -462,7 +486,8 @@ flowchart TD
 
 | Decision Area | Approved Choice | Implementation Strategy |
 |---|---|---|
-| **Local Database** | **Dockerized PostgreSQL** | `postgres:16-alpine` via `infrastructure/docker/docker-compose.yml`. *Docker Desktop is a mandatory prerequisite.* |
+| **Local Database** | **Native PostgreSQL 16 on Windows** | Installed directly on Windows, configured as an automatic Windows service on default port `5432`, managed with **pgAdmin 4**. Spring Boot connects via environment variables (`SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD`). |
+| **Docker Desktop** | **Removed as Prerequisite (Optional for Future)** | Zero requirement for Docker Desktop during local development. Docker remains strictly an optional target for future cloud packaging and containerized deployments. |
 | **Caching Layer** | **Removed from Initial Scope** | Redis deferred. Rely on standard PostgreSQL indexing and JVM in-memory caching. |
 | **Frontend Strategy** | **Unified Next.js App** | Single Next.js application in `apps/web` handling marketing routes and future SaaS portal. |
 | **Backend Strategy** | **Independent Spring Boot API** | Decoupled Spring Boot 3 service in `apps/api` with Spring for GraphQL and Maven Wrapper. |
@@ -472,4 +497,4 @@ flowchart TD
 | **Factual Governance** | **Founder Verification Gate** | All portfolio projects and company statements flagged `[Pending Founder Verification]`; zero unverified claims. |
 
 ---
-*End of Master Project Plan & Architecture Blueprint v1.1.0.*
+*End of Master Project Plan & Architecture Blueprint v1.2.0.*
