@@ -1,69 +1,109 @@
-import Image from "next/image";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export default function Home() {
+  const stackItems = [
+    { label: "Frontend", value: "Next.js 16 (App Router) + TypeScript" },
+    { label: "Styling", value: "Tailwind CSS v4" },
+    { label: "API Protocol", value: "GraphQL" },
+    { label: "Backend Core", value: "Java 17 + Spring Boot 3" },
+    { label: "Database", value: "PostgreSQL 17 (Native Windows, Port 5432)" },
+    { label: "DB Management", value: "pgAdmin 4" },
+  ];
+
+  const upcomingModules = [
+    {
+      title: "Asset Hierarchy & Digital Twin",
+      desc: "Multi-tier plant, production line, machine, and component registry with QR code tracking.",
+    },
+    {
+      title: "Work Order Management",
+      desc: "End-to-end corrective, preventive, and emergency work order dispatching and verification.",
+    },
+    {
+      title: "Preventive Maintenance",
+      desc: "Time and meter-based trigger engines with automated maintenance scheduling.",
+    },
+    {
+      title: "Spare Parts & Inventory",
+      desc: "Machine Bill of Materials (BOM), warehouse bin tracking, and stock threshold alerts.",
+    },
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main className="flex-1 flex flex-col justify-center items-center px-6 py-20">
+      <div className="max-w-4xl w-full mx-auto space-y-12">
+        {/* Hero Section */}
+        <div className="space-y-4 text-center sm:text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-400 text-xs font-mono">
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+            {SITE_CONFIG.status}
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
+            {SITE_CONFIG.name}
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-xl text-zinc-400 max-w-2xl font-light">
+            {SITE_CONFIG.tagline}
+          </p>
+          <p className="text-sm text-zinc-500 max-w-2xl">
+            {SITE_CONFIG.description}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Flagship Product Showcase Banner */}
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 sm:p-8 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+            <div>
+              <span className="text-xs uppercase font-mono tracking-wider text-amber-400">
+                Flagship SaaS Solution
+              </span>
+              <h2 className="text-2xl font-bold text-zinc-100">
+                {SITE_CONFIG.flagshipProduct}
+              </h2>
+            </div>
+            <span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-mono bg-zinc-800 text-zinc-300 border border-zinc-700 w-fit">
+              Architecture Baseline Ready
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {upcomingModules.map((module) => (
+              <div
+                key={module.title}
+                className="p-4 rounded-lg border border-zinc-800/80 bg-zinc-950/50 space-y-2"
+              >
+                <h3 className="font-semibold text-sm text-zinc-200">
+                  {module.title}
+                </h3>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  {module.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+
+        {/* System Architecture Grid */}
+        <div className="space-y-4">
+          <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-500">
+            Approved System Architecture Baseline
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {stackItems.map((item) => (
+              <div
+                key={item.label}
+                className="p-3.5 rounded-lg border border-zinc-800/80 bg-zinc-900/40"
+              >
+                <div className="text-[11px] font-mono text-zinc-500">
+                  {item.label}
+                </div>
+                <div className="text-xs font-medium text-zinc-200 mt-1 truncate">
+                  {item.value}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
