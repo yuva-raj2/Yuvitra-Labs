@@ -1,6 +1,6 @@
 # Yuvitra Labs & Yuvitra CMMS — Master Project Plan & Architecture Blueprint
 
-**Document Version:** 1.2.0  
+**Document Version:** 1.2.1  
 **Status:** Approved Architectural Baseline & Phased Implementation Plan  
 **Role:** Chief Software Architect & Technical Lead  
 **Target Enterprise:** Yuvitra Labs (Industrial Software & SaaS Platform)  
@@ -16,7 +16,7 @@ Yuvitra Labs is an industrial software venture engineering modern digital soluti
 1. **Initial Scope Focus:** Deliver a high-precision corporate website for Yuvitra Labs and a compelling product showcase for Yuvitra CMMS. Full operational CMMS dashboards are deferred to later phases.
 2. **Unified Frontend:** Single Next.js (App Router) application handling both corporate marketing pages and future authenticated CMMS routes.
 3. **Decoupled Backend:** Independent Java Spring Boot service exposing a strongly typed GraphQL API.
-4. **Local Database Architecture (Native Windows):** Native PostgreSQL 16 installed directly on Windows running as an automatic Windows service on default port `5432`, managed visually via **pgAdmin 4**. Spring Boot connects via environment variables. Redis is removed from initial scope to keep development lean.
+4. **Local Database Architecture (Native PostgreSQL 17):** Native PostgreSQL 17 installed directly on Windows, running as an automatic Windows service (`postgresql-x64-17`) on default port `5432`, managed visually via **pgAdmin 4**. Target database: `yuvitra_db`. Spring Boot connects via environment variables. Redis is removed from initial scope to keep development lean.
 5. **Docker Desktop Status:** Docker Desktop is **not required** and is completely removed as a development prerequisite. Docker remains strictly an optional deployment target for future production containerization.
 6. **Purposeful Visuals:** Three.js 3D elements will remain lightweight, minimal, and purposeful (focusing on responsive industrial digital twin models rather than heavy, distracting visual effects).
 7. **Configurable Integrations:** Email, WhatsApp, PDF generation, and AI chatbot services are designed as configurable adapters with local mock fallbacks.
@@ -38,12 +38,12 @@ Yuvitra Labs is an industrial software venture engineering modern digital soluti
 | **npm** | `11.6.2` | Frontend package manager | Verified & Ready |
 | **Java** | `17.0.16 LTS` (64-Bit) | Backend JVM runtime (Spring Boot 3.x) | Verified & Ready |
 | **Git** | `2.48.1.windows.1` | Source code control | Verified & Ready |
-| **PostgreSQL 16 & pgAdmin 4** | Native Windows Service (Port `5432`) | Primary relational database & management GUI | **Local Prerequisite:** Install PostgreSQL 16 with pgAdmin 4 on Windows. Configure service to start automatically on port `5432`. Create database `yuvitra_db`. |
+| **PostgreSQL 17 & pgAdmin 4** | Native Windows Service (`postgresql-x64-17`, Port `5432`) | Primary relational database & management GUI | **Verified & Running:** PostgreSQL 17 is installed on Windows, running as an active service on port `5432`. Target database `yuvitra_db` managed via pgAdmin 4. |
 | **Maven / Gradle** | Not on system `PATH` | Java build automation | **Standard Action:** Package backend with Maven Wrapper (`./mvnw` / `mvnw.cmd`) for zero-install standalone compilation. |
 | **Docker Engine / Desktop** | Not installed / Not supported on host | Optional future containerization | **No action required for development.** Docker Desktop is explicitly removed as a prerequisite. Docker remains optional for future cloud deployment only. |
 
 > [!NOTE]
-> **Local Database Prerequisite:** Native PostgreSQL 16 on Windows with pgAdmin 4 running on standard port `5432`. Spring Boot will connect directly via standard JDBC environment variables (`SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD`) with localhost fallback defaults.
+> **Active Database Configuration:** Native PostgreSQL 17 on Windows with pgAdmin 4 running on standard port `5432` (`localhost:5432/yuvitra_db`, user: `postgres`). Spring Boot connects directly via standard JDBC environment variables (`SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD`) with localhost fallback defaults.
 
 ---
 
@@ -147,8 +147,8 @@ YUVITRA_LABS/
 │       └── package.json
 │
 ├── infrastructure/
-│   ├── database/                        # Native PostgreSQL local setup scripts & SQL seeds
-│   │   └── init-db.sql                  # Database creation & user grants
+│   ├── database/                        # Native PostgreSQL 17 setup scripts & SQL seeds
+│   │   └── init-db.sql                  # Database creation & user grants (yuvitra_db)
 │   └── docker/                          # (Optional) Dockerfiles for future production cloud builds
 │       ├── Dockerfile.web
 │       └── Dockerfile.api
@@ -156,7 +156,7 @@ YUVITRA_LABS/
 ├── docs/
 │   ├── adr/                             # Architecture Decision Records
 │   ├── api/                             # GraphQL schema documentation
-│   └── runbooks/                        # Native PostgreSQL setup guide & operational runbooks
+│   └── runbooks/                        # Native PostgreSQL 17 setup guide & operational runbooks
 │
 ├── .gitignore
 ├── .editorconfig
@@ -191,7 +191,7 @@ The primary deliverable of Phase 1 is a website that conveys engineering excelle
 4. **Technology & Engineering (`/technology`)**:
    - Deep dive into the architectural principles behind Yuvitra Labs:
      - Robust Java Spring Boot backend with strong transactional guarantees.
-     - PostgreSQL relational integrity.
+     - PostgreSQL 17 relational integrity.
      - Modern Next.js frontend with GraphQL for zero-overfetching API communication.
      - Edge-to-cloud security posture.
 5. **About Yuvitra Labs (`/about`)**:
@@ -211,9 +211,9 @@ The operational CMMS dashboard is intentionally deferred from Phase 1. Its archi
 
 ---
 
-## 6. PostgreSQL Relational Data Model (Native Windows Service)
+## 6. PostgreSQL 17 Relational Data Model (Native Windows Service)
 
-PostgreSQL 16 runs directly as a native Windows service listening on default port `5432`, managed visually via **pgAdmin 4**. Redis has been removed from the initial scope to eliminate unnecessary runtime dependencies.
+PostgreSQL 17 runs directly as a native Windows service (`postgresql-x64-17`) listening on default port `5432`, managed visually via **pgAdmin 4**. Redis has been removed from the initial scope to eliminate unnecessary runtime dependencies.
 
 Spring Boot connects directly using standard JDBC environment variables configured in `apps/api/src/main/resources/application.yml`:
 ```yaml
@@ -414,8 +414,8 @@ All external integrations are architected with **pluggable adapters and configur
 - **Multi-Tenancy Assurance:** Tenant ID scoping baked into JPA repository interfaces for future SaaS phases.
 
 ### 9.3 Infrastructure & Local Development
-- **Local PostgreSQL:** Native Windows installation of PostgreSQL 16 on default port `5432`, managed visually via **pgAdmin 4**.
-- **Windows Service Automation:** PostgreSQL configured to start automatically as a Windows service (`postgresql-x64-16`) in `services.msc`.
+- **Local Database (PostgreSQL 17):** Native Windows installation of PostgreSQL 17 on default port `5432`, managed visually via **pgAdmin 4**.
+- **Windows Service Automation:** Running automatically as a Windows service (`postgresql-x64-17`) in `services.msc`.
 - **Environment-Driven Configuration:** Spring Boot dynamically connects to PostgreSQL via environment variables:
   - `SPRING_DATASOURCE_URL` (Defaults to `jdbc:postgresql://localhost:5432/yuvitra_db`)
   - `SPRING_DATASOURCE_USERNAME` (Defaults to `postgres`)
@@ -429,7 +429,7 @@ All external integrations are architected with **pluggable adapters and configur
 
 ```mermaid
 flowchart TD
-    P1["Phase 1: Foundation, Corporate Website & CMMS Showcase\n(Monorepo, Native PostgreSQL 16 + pgAdmin 4, Next.js, Minimal Three.js, Contact GraphQL)"]
+    P1["Phase 1: Foundation, Corporate Website & CMMS Showcase\n(Monorepo, Native PostgreSQL 17 + pgAdmin 4, Next.js, Minimal Three.js, Contact GraphQL)"]
     P2["Phase 2: Spring Boot Backend Architecture & GraphQL Core\n(Schema expansion, Security baseline, Flyway migrations)"]
     P3["Phase 3: Yuvitra CMMS Core Engine\n(Asset Hierarchy, Work Order State Machine, PM Scheduling)"]
     P4["Phase 4: CMMS Extended Modules\n(Spare parts inventory, Floor requests, KPI calculations)"]
@@ -445,13 +445,13 @@ flowchart TD
 
 ### Phase 1: Foundation, Corporate Website & CMMS Showcase *(Current Phase)*
 1. Set up monorepo structure: `apps/web`, `apps/api`, `packages/graphql-schema`, `infrastructure/database`, and `docs/`.
-2. Configure local native PostgreSQL 16 database (`yuvitra_db`) via pgAdmin 4 on port `5432` and verify connection.
+2. Configure local native PostgreSQL 17 database (`yuvitra_db`) via pgAdmin 4 on port `5432` and verify connection.
 3. Scaffold unified Next.js 15+ application with TypeScript and Tailwind CSS.
-4. Scaffold independent Spring Boot 3.x backend with Maven Wrapper, Spring for GraphQL, and environment-driven PostgreSQL configuration.
+4. Scaffold independent Spring Boot 3.x backend with Maven Wrapper, Spring for GraphQL, and environment-driven PostgreSQL 17 configuration.
 5. Implement purposeful, minimal Three.js industrial visualizer hero.
 6. Build complete public corporate website (Home, Solutions, Technology, About, Contact).
 7. Build Yuvitra CMMS Product Showcase page with interactive feature walkthroughs.
-8. Wire contact/demo inquiry mutation from Next.js to Spring Boot and PostgreSQL.
+8. Wire contact/demo inquiry mutation from Next.js to Spring Boot and PostgreSQL 17.
 
 ### Phase 2: Spring Boot Backend Architecture & GraphQL Core
 1. Formulate Flyway migration scripts for tenancy, users, and core schemas.
@@ -486,7 +486,7 @@ flowchart TD
 
 | Decision Area | Approved Choice | Implementation Strategy |
 |---|---|---|
-| **Local Database** | **Native PostgreSQL 16 on Windows** | Installed directly on Windows, configured as an automatic Windows service on default port `5432`, managed with **pgAdmin 4**. Spring Boot connects via environment variables (`SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD`). |
+| **Local Database** | **Native PostgreSQL 17 on Windows** | Installed directly on Windows, running as Windows service `postgresql-x64-17` on default port `5432`, managed with **pgAdmin 4**. Database: `yuvitra_db`. Spring Boot connects via environment variables (`SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD`). |
 | **Docker Desktop** | **Removed as Prerequisite (Optional for Future)** | Zero requirement for Docker Desktop during local development. Docker remains strictly an optional target for future cloud packaging and containerized deployments. |
 | **Caching Layer** | **Removed from Initial Scope** | Redis deferred. Rely on standard PostgreSQL indexing and JVM in-memory caching. |
 | **Frontend Strategy** | **Unified Next.js App** | Single Next.js application in `apps/web` handling marketing routes and future SaaS portal. |
@@ -497,4 +497,4 @@ flowchart TD
 | **Factual Governance** | **Founder Verification Gate** | All portfolio projects and company statements flagged `[Pending Founder Verification]`; zero unverified claims. |
 
 ---
-*End of Master Project Plan & Architecture Blueprint v1.2.0.*
+*End of Master Project Plan & Architecture Blueprint v1.2.1.*
