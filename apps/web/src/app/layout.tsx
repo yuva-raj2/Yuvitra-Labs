@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -15,9 +15,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yuvitra Labs | Industrial Software & Yuvitra CMMS",
+  title: "Yuvitra Labs | Industrial Software & Digital Engineering",
   description:
-    "Next-generation computerized maintenance management system and industrial software solutions.",
+    "Engineering modern computerized maintenance management system (Yuvitra CMMS), digital twin architectures, and telemetry-driven maintenance workflows.",
+  icons: {
+    icon: [
+      { url: "/brand/yl-favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/brand/yl-favicon.svg",
+    apple: "/brand/yl-favicon.svg",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#090A0F",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -30,7 +43,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 font-sans">
+      <body className="min-h-full flex flex-col bg-[#090A0F] text-[#F4F4F5] font-sans antialiased selection:bg-amber-500/20 selection:text-amber-300">
         <Header />
         <div className="flex-1 flex flex-col">{children}</div>
         <Footer />
