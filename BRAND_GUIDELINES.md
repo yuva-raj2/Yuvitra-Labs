@@ -51,7 +51,11 @@ The Yuvitra Labs monogram unifies the letters **Y** and **L** into a single, coh
 
 ---
 
-### 2.2 Brand Asset Organization
+### 2.2 Brand Asset Organization & Tagline Specification
+
+- **Primary Brand Wordmark:** `YUVITRA LABS`
+- **Official Brand Tagline:** `INDUSTRIAL SOFTWARE & DIGITAL ENGINEERING`
+- **Flagship Solution:** `Yuvitra CMMS`
 
 All production-grade vector assets are placed in [`apps/web/public/brand/`](file:///E:/YUVITRA_LABS/apps/web/public/brand/):
 
@@ -59,9 +63,9 @@ All production-grade vector assets are placed in [`apps/web/public/brand/`](file
 |---|---|---|
 | **[`yl-monogram.svg`](file:///E:/YUVITRA_LABS/apps/web/public/brand/yl-monogram.svg)** | `100 x 100` | Pure geometric mark without typography. Transparent background. Use in app launcher icons, avatars, watermarks, and 3D textures. |
 | **[`yl-favicon.svg`](file:///E:/YUVITRA_LABS/apps/web/public/brand/yl-favicon.svg)** | `32 x 32` | Engineered specifically for micro-scale legibility (16px / 32px / 48px). Features a dark squircle container with ambient telemetry backlight. |
-| **[`yl-logo-primary.svg`](file:///E:/YUVITRA_LABS/apps/web/public/brand/yl-logo-primary.svg)** | `340 x 80` | Horizontal master lockup (monogram + "YUVITRA LABS" + descriptor). Transparent background, designed for dark headers and navigation bars. |
-| **[`yl-logo-dark.svg`](file:///E:/YUVITRA_LABS/apps/web/public/brand/yl-logo-dark.svg)** | `380 x 90` | Self-contained dark card lockup with `#090A0F` obsidian canvas and subtle border. Ideal for social cards, documentation covers, and banners. |
-| **[`yl-logo-light.svg`](file:///E:/YUVITRA_LABS/apps/web/public/brand/yl-logo-light.svg)** | `380 x 90` | High-contrast light lockup with `#FFFFFF` canvas, dark graphite Y-wing, and amber L-spine for invoices, whitepapers, and PDF exports. |
+| **[`yl-logo-primary.svg`](file:///E:/YUVITRA_LABS/apps/web/public/brand/yl-logo-primary.svg)** | `350 x 80` | Horizontal master lockup (monogram + "YUVITRA LABS" + "INDUSTRIAL SOFTWARE & DIGITAL ENGINEERING" descriptor). Transparent background, designed for dark headers and navigation bars. |
+| **[`yl-logo-dark.svg`](file:///E:/YUVITRA_LABS/apps/web/public/brand/yl-logo-dark.svg)** | `395 x 90` | Self-contained dark card lockup with `#090A0F` obsidian canvas, subtle border, and "INDUSTRIAL SOFTWARE & DIGITAL ENGINEERING" descriptor. Ideal for social cards, documentation covers, and banners. |
+| **[`yl-logo-light.svg`](file:///E:/YUVITRA_LABS/apps/web/public/brand/yl-logo-light.svg)** | `395 x 90` | High-contrast light lockup with `#FFFFFF` canvas, dark graphite Y-wing, amber L-spine, and "INDUSTRIAL SOFTWARE & DIGITAL ENGINEERING" descriptor for invoices, whitepapers, and PDF exports. |
 
 ---
 
