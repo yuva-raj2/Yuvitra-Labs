@@ -10,10 +10,10 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#27272A] bg-[#090A0F]/90 backdrop-blur-md transition-all">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-18">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 sm:h-20">
         {/* Left: Reusable Brand Logo */}
-        <div className="flex items-center gap-3">
-          <Logo variant="primary" width={165} height={38} priority href="#home" />
+        <div className="flex items-center gap-3 shrink-0">
+          <Logo variant="primary" width={160} height={36} priority href="#home" />
         </div>
 
         {/* Center: Desktop Navigation Links (All 8 links) */}

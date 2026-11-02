@@ -23,7 +23,9 @@ export default function Home() {
         className="relative overflow-hidden pt-16 pb-20 sm:pt-24 sm:pb-28 px-4 sm:px-6 lg:px-8 border-b border-[#27272A] bg-gradient-to-b from-[#0E1017] via-[#090A0F] to-[#090A0F]"
       >
         {/* Subtle Ambient Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] max-w-full h-[300px] bg-amber-500/5 blur-[120px] pointer-events-none rounded-full" />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-48 bg-amber-500/5 blur-3xl rounded-full" />
+        </div>
 
         <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 relative z-10 text-left">
           {/* Eyebrow Badge */}
