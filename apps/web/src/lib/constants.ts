@@ -10,6 +10,7 @@ export const SITE_CONFIG = {
 } as const;
 
 export const NAV_LINKS = [
+  
   { label: "CMMS Overview", href: "#cmms" },
   { label: "Modules", href: "#modules" },
   { label: "Architecture", href: "#architecture" },
