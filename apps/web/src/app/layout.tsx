@@ -45,7 +45,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[#090A0F] text-[#F4F4F5] font-sans antialiased selection:bg-amber-500/20 selection:text-amber-300">
         <Header />
-        <div className="flex-1 flex flex-col">{children}</div>
+        <div className="flex-1 flex flex-col min-w-0 w-full">{children}</div>
         <Footer />
       </body>
     </html>
