@@ -2,7 +2,7 @@ import React from "react";
 import { Logo } from "@/components/ui/Logo";
 import {
   SITE_CONFIG,
-  CMMS_MODULES,
+  CMMS_MODULES, 
   TECH_STACK,
 } from "@/lib/constants";
 
