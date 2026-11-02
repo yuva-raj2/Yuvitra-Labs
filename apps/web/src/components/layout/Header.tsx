@@ -13,7 +13,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-18">
         {/* Left: Reusable Brand Logo */}
         <div className="flex items-center gap-3">
-          <Logo variant="primary" width={175} height={40} priority href="#home" />
+          <Logo variant="primary" width={165} height={38} priority href="#home" />
         </div>
 
         {/* Center: Desktop Navigation Links (All 8 links) */}
@@ -32,7 +32,7 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Medium-screen Navigation Links (truncated or compact for laptops) */}
+        {/* Medium-screen Navigation Links */}
         <nav
           className="hidden lg:flex xl:hidden items-center gap-4 text-xs font-medium text-zinc-400"
           aria-label="Compact Navigation"
@@ -64,13 +64,7 @@ export function Header() {
         </div>
 
         {/* Mobile Hamburger Button */}
-        <div className="flex lg:hidden items-center gap-2">
-          <a
-            href="#contact"
-            className="sm:hidden inline-flex items-center justify-center px-3 py-1.5 rounded-md bg-amber-500 hover:bg-amber-400 text-zinc-950 font-semibold text-[11px] uppercase font-mono tracking-wider"
-          >
-            Demo
-          </a>
+        <div className="flex lg:hidden items-center">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
