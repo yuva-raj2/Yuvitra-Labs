@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Yuvitra Labs | Industrial Software & Digital Engineering",
   description:
-    "Engineering modern computerized maintenance management system (Yuvitra CMMS), digital twin architectures, and telemetry-driven maintenance workflows.",
+    "Yuvitra Labs develops industrial software, custom digital platforms, AI-powered assistants and intelligent automation solutions that help businesses modernize their operations.",
   icons: {
     icon: [
       { url: "/brand/yl-favicon.svg", type: "image/svg+xml" },
