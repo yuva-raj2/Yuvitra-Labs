@@ -625,7 +625,7 @@ export default function Home() {
                   <div>
                     <span className="text-zinc-500 block">General &amp; Technical:</span>
                     <a
-                      href="mailto:contact@yuvitralabs.com"
+                      href="mailto:yuvaarun09964@gmail.com"
                       className="text-zinc-200 hover:text-amber-400 transition-colors font-semibold break-all"
                     >
                       {SITE_CONFIG.email}
