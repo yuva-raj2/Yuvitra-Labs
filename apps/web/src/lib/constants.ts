@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   flagshipProduct: "Yuvitra CMMS",
   status: "Industrial Software & Digital Engineering",
   location: "Coimbatore, Tamil Nadu, India",
-  email: "contact@yuvitralabs.com",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@yuvitralabs.com",
   year: 2026,
 } as const;
 
@@ -38,7 +38,7 @@ export const SERVICE_PILLARS = [
       "Spare parts inventory & machine BOM registry",
       "Standard Operating Procedure (SOP) digital guides",
     ],
-    highlight: "Flagship CMMS Core",
+    highlight: "CMMS Architecture",
   },
   {
     id: "custom-software-web",
@@ -76,33 +76,39 @@ export const SERVICE_PILLARS = [
   },
 ] as const;
 
+export const CMMS_STATUS = {
+  phase: "Phase 1: Architecture & Technical Specification",
+  state: "In Active Development",
+  note: "Core modules represent the approved architectural blueprint and functional specification. Production software builds are currently in development.",
+} as const;
+
 export const CMMS_MODULES = [
   {
     id: "asset-hierarchy",
     title: "Asset Hierarchy & Digital Twin",
-    badge: "Core Engine",
-    code: "MOD-01",
+    badge: "Planned Core",
+    code: "PLANNED-01",
     desc: "Multi-tier plant, production line, machine, and component registry with industrial QR code tagging, metadata specifications, and telemetry mapping.",
   },
   {
     id: "work-orders",
     title: "Work Order Lifecycle & Dispatch",
-    badge: "Operations",
-    code: "MOD-02",
+    badge: "Planned Ops",
+    code: "PLANNED-02",
     desc: "End-to-end corrective, preventive, and emergency work order dispatching with priority matrices, labor hour logs, and digital technician sign-offs.",
   },
   {
     id: "preventive-maintenance",
     title: "Preventive Maintenance Engine",
-    badge: "Automation",
-    code: "MOD-03",
+    badge: "Planned Engine",
+    code: "PLANNED-03",
     desc: "Automated calendar recurrence schedules and runtime meter threshold triggers designed to eliminate unplanned downtime and extend equipment life.",
   },
   {
     id: "inventory-bom",
     title: "Spare Parts & Machine BOM",
-    badge: "Inventory",
-    code: "MOD-04",
+    badge: "Planned Spares",
+    code: "PLANNED-04",
     desc: "Machine Bill of Materials (BOM), warehouse bin tracking, minimum stock reorder thresholds, and direct work order parts consumption logs.",
   },
 ] as const;
@@ -110,19 +116,19 @@ export const CMMS_MODULES = [
 export const CMMS_CAPABILITIES = [
   {
     title: "QR Code Equipment Scanning",
-    desc: "Instant technician equipment lookup on mobile devices directly from machine tags on the plant floor.",
+    desc: "Planned technician equipment lookup on mobile devices directly from machine tags on the plant floor.",
   },
   {
     title: "Granular Role-Based Access",
-    desc: "Dedicated interfaces and authorization for Plant Managers, Maintenance Supervisors, and Field Technicians.",
+    desc: "Planned authorization policies for Plant Managers, Maintenance Supervisors, and Field Technicians.",
   },
   {
     title: "Offline-Resilient Architecture",
-    desc: "Engineered to withstand intermittent shop-floor network conditions without losing operational records.",
+    desc: "Architected to withstand intermittent shop-floor network conditions without losing operational records.",
   },
   {
     title: "Comprehensive Audit Logs",
-    desc: "Immutable change tracking across all work orders, parts adjustments, and maintenance status transitions.",
+    desc: "Architected immutable change tracking across all work orders, parts adjustments, and maintenance status transitions.",
   },
 ] as const;
 
@@ -217,14 +223,14 @@ export const SOLUTION_DOMAINS = [
   {
     id: "cmms-platform",
     title: "Computerized Maintenance Management (CMMS)",
-    category: "Industrial SaaS",
-    desc: "Multi-tenant asset registry, QR-code equipment tagging, scheduled preventive maintenance workflows, and spare parts inventory tracking.",
+    category: "Industrial SaaS Architecture",
+    desc: "Multi-tenant asset registry design, QR-code equipment tagging, scheduled preventive maintenance workflows, and spare parts inventory tracking.",
     tags: ["Asset Hierarchy", "Work Orders", "Preventive Maintenance", "BOM"],
   },
   {
     id: "telemetry-monitoring",
     title: "Machine Telemetry & Condition Monitoring",
-    category: "IoT & Operations",
+    category: "IoT & Operations Engineering",
     desc: "Real-time machine status dashboards, runtime hour counters, threshold-based alert triggers, and equipment downtime incident analysis.",
     tags: ["Runtime Meters", "Downtime Logging", "Threshold Alerts", "Dashboards"],
   },
@@ -238,7 +244,7 @@ export const SOLUTION_DOMAINS = [
   {
     id: "notification-pipelines",
     title: "Automated Notification & Dispatch Engine",
-    category: "Automation",
+    category: "Automation Architecture",
     desc: "Event-driven communication pipelines delivering instant machine breakdown alerts and work order assignments across WhatsApp, SMS, and Email.",
     tags: ["WhatsApp Business API", "Email Dispatch", "Event Architecture", "PDF Engine"],
   },
@@ -248,12 +254,12 @@ export const ENGAGEMENT_MODELS = [
   {
     name: "Pilot & MVP Development",
     badge: "Rapid Validation",
-    bestFor: "Ideal for companies validating a specific digital tool, pilot CMMS rollout, or modernization proof-of-concept.",
+    bestFor: "Ideal for companies validating a specific digital tool, pilot CMMS specification, or modernization proof-of-concept.",
     features: [
       "Targeted operational workflow audit",
       "Complete system blueprint & UI design",
       "Core MVP platform engineering",
-      "Initial production deployment & pilot testing",
+      "Staging deployment & milestone validation",
       "Full source code & documentation handover",
     ],
     ctaText: "Discuss Pilot Scope",
@@ -261,7 +267,6 @@ export const ENGAGEMENT_MODELS = [
   {
     name: "Custom Enterprise Platform",
     badge: "Full-Scale Solution",
-    popular: true,
     bestFor: "Ideal for manufacturing enterprises requiring bespoke industrial software, full CMMS deployment, or multi-facility modernization.",
     features: [
       "End-to-end domain-driven architecture",
@@ -281,7 +286,7 @@ export const ENGAGEMENT_MODELS = [
       "Reserved senior engineering capacity",
       "Sprint-by-sprint feature development",
       "Proactive performance & database tuning",
-      "Guaranteed SLA response times",
+      "Defined response guidelines & technical support",
       "Direct technical advisory & roadmap planning",
     ],
     ctaText: "Explore Retainer Options",
