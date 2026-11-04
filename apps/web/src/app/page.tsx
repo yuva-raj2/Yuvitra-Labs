@@ -627,7 +627,7 @@ export default function Home() {
                   <div>
                     <span className="text-zinc-500 block">General &amp; Technical:</span>
                     <a
-                      href="mailto:yuvaarun09964@gmail.com"
+                      href={`mailto:${SITE_CONFIG.email}`}
                       className="text-zinc-200 hover:text-amber-400 transition-colors font-semibold break-all"
                     >
                       {SITE_CONFIG.email}
@@ -638,18 +638,18 @@ export default function Home() {
                     <span className="text-zinc-300 block">{SITE_CONFIG.location}</span>
                   </div>
                   <div className="pt-2">
-                    <span className="text-zinc-500 block">Turnaround SLA:</span>
-                    <span className="text-emerald-400 block">Within 24 business hours</span>
+                    <span className="text-zinc-500 block">Consultations:</span>
+                    <span className="text-zinc-300 block">Direct with software architects</span>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 sm:p-6 space-y-2">
+              <div className="rounded-xl border border-[#27272A] bg-[#10121A]/60 p-5 sm:p-6 space-y-2">
                 <span className="text-xs font-mono uppercase tracking-wider text-amber-400 block font-semibold">
-                  Early Pilot Program
+                  Technical Architecture Inquiries
                 </span>
                 <p className="text-xs text-zinc-400 leading-relaxed">
-                  We are accepting applications from manufacturing facilities and machine shops interested in piloting <strong className="text-zinc-200">Yuvitra CMMS</strong> with hands-on engineering setup and telemetry integration.
+                  Have questions regarding the Yuvitra CMMS technical blueprint, database schema design, or bespoke industrial software development? Contact our engineering team directly to discuss your requirements.
                 </p>
               </div>
             </div>
