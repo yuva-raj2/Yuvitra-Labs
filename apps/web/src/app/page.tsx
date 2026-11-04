@@ -205,13 +205,13 @@ export default function Home() {
           3. PROMINENT FLAGSHIP SHOWCASE: YUVITRA CMMS (#products)
           ========================================================================= */}
       <section id="products" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 border-b border-[#27272A] bg-[#0B0D14]">
-        <div className="max-w-6xl mx-auto space-y-12 sm:space-y-16">
+        <div className="max-w-6xl mx-auto space-y-10 sm:space-y-12">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="space-y-3 max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/25 bg-amber-500/10 text-amber-400 text-xs font-mono uppercase tracking-wider">
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                <span>Flagship Industrial SaaS</span>
+                <span>Flagship Industrial Platform &bull; Phase 1 Specification</span>
               </div>
               <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-100 tracking-tight">
                 {SITE_CONFIG.flagshipProduct}
@@ -225,9 +225,28 @@ export default function Home() {
                 href="#contact"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3 rounded-md bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-zinc-950 font-semibold text-xs tracking-wider uppercase font-mono transition-all shadow-sm text-center"
               >
-                Schedule CMMS Walkthrough
+                Inquire About CMMS Architecture
               </a>
             </div>
+          </div>
+
+          {/* Status & Architectural Blueprint Callout */}
+          <div className="p-4 sm:p-5 rounded-xl border border-amber-500/20 bg-amber-500/5 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs font-mono">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 text-amber-400 font-semibold uppercase tracking-wider text-[11px]">
+                <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+                <span>Current Status: Architecture Blueprint &amp; Specification</span>
+              </div>
+              <p className="text-zinc-400 text-xs max-w-2xl leading-relaxed">
+                The modules detailed below represent our verified technical specification and domain blueprint. Core software development is active, with production releases planned in upcoming roadmap phases.
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 font-semibold whitespace-nowrap"
+            >
+              <span>Consult Engineering Lead &rarr;</span>
+            </a>
           </div>
 
           {/* Core Modules Grid */}
@@ -479,66 +498,49 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            {ENGAGEMENT_MODELS.map((model, i) => {
-              const isPopular = "popular" in model && model.popular;
-              return (
-                <div
-                  key={i}
-                  className={`rounded-2xl border p-6 sm:p-8 flex flex-col justify-between transition-all ${
-                    isPopular
-                      ? "border-amber-500/50 bg-[#12141F] shadow-lg shadow-amber-500/5 relative"
-                      : "border-[#27272A] bg-[#10121A]/70 hover:border-zinc-700"
-                  }`}
-                >
-                  {isPopular && (
-                    <div className="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-amber-500 text-zinc-950 font-mono font-bold text-[10px] uppercase tracking-wider">
-                      Most Requested
-                    </div>
-                  )}
-
-                  <div className="space-y-5">
-                    <div className="space-y-2">
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 block">
-                        {model.badge}
-                      </span>
-                      <h3 className="text-xl sm:text-2xl font-bold text-zinc-100">
-                        {model.name}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                        {model.bestFor}
-                      </p>
-                    </div>
-
-                    <div className="space-y-2.5 pt-4 border-t border-zinc-800">
-                      <span className="text-xs font-mono uppercase tracking-wider text-zinc-300 block">
-                        Included In Scope:
-                      </span>
-                      <ul className="space-y-2 text-xs text-zinc-400">
-                        {model.features.map((feat, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <span className="text-amber-400 font-bold">&check;</span>
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+            {ENGAGEMENT_MODELS.map((model, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border border-[#27272A] bg-[#10121A]/70 hover:border-zinc-700 p-6 sm:p-8 flex flex-col justify-between transition-all"
+              >
+                <div className="space-y-5">
+                  <div className="space-y-2">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 block">
+                      {model.badge}
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold text-zinc-100">
+                      {model.name}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                      {model.bestFor}
+                    </p>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-zinc-800/80">
-                    <a
-                      href="#contact"
-                      className={`w-full inline-flex items-center justify-center px-4 py-3 rounded-lg font-mono font-semibold text-xs uppercase tracking-wider transition-all text-center ${
-                        isPopular
-                          ? "bg-amber-500 hover:bg-amber-400 text-zinc-950"
-                          : "bg-zinc-800 hover:bg-zinc-700 text-zinc-200"
-                      }`}
-                    >
-                      {model.ctaText} &rarr;
-                    </a>
+                  <div className="space-y-2.5 pt-4 border-t border-zinc-800">
+                    <span className="text-xs font-mono uppercase tracking-wider text-zinc-300 block">
+                      Included In Scope:
+                    </span>
+                    <ul className="space-y-2 text-xs text-zinc-400">
+                      {model.features.map((feat, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-amber-400 font-bold">&check;</span>
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              );
-            })}
+
+                <div className="pt-6 mt-6 border-t border-zinc-800/80">
+                  <a
+                    href="#contact"
+                    className="w-full inline-flex items-center justify-center px-4 py-3 rounded-lg font-mono font-semibold text-xs uppercase tracking-wider transition-all text-center bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white"
+                  >
+                    {model.ctaText} &rarr;
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -565,7 +567,7 @@ export default function Home() {
               We believe industrial software should be as fast, intuitive, and enjoyable to use as the best consumer applications, while retaining the uncompromising reliability, deterministic performance, and strict data integrity demanded by factory managers and reliability engineers.
             </p>
             <p>
-              Whether developing our flagship <strong className="text-amber-400 font-semibold">{SITE_CONFIG.flagshipProduct}</strong>, building custom digital platforms, or deploying autonomous AI assistants, we adhere to strict architectural rigor: type-safe API contracts, domain-driven design, and battle-tested technology foundations.
+              Whether developing our flagship <strong className="text-amber-400 font-semibold">{SITE_CONFIG.flagshipProduct}</strong>, building custom digital platforms, or deploying autonomous AI assistants, we adhere to strict architectural rigor: type-safe API contracts, domain-driven design, and proven open-source technology foundations.
             </p>
           </div>
 
